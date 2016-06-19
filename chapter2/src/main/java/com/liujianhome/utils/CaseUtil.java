@@ -7,9 +7,6 @@ import org.slf4j.LoggerFactory;
  * Created by Administrator on 2016/6/17.
  */
 public class CaseUtil {
-    public static void main(String[] args) {
-
-    }
 
     public static final Logger log = LoggerFactory.getLogger(CaseUtil.class);
 
