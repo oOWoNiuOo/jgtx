@@ -12,7 +12,7 @@ import java.util.Properties;
  * Created by Administrator on 2016/6/17.
  */
 public class PropsUtils {
-    private static final Logger log = LoggerFactory.getLogger(PropsUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(PropsUtils.class);
 
     /**
      * 加载属性文件
@@ -23,7 +23,7 @@ public class PropsUtils {
     public static Properties loadProps(String fileName) {
         Properties properties = null;
         InputStream is = null;
-
+        logger.info(Thread.currentThread().getName() + "-加载配置");
         try {
             is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
             if (is == null) {
@@ -32,15 +32,15 @@ public class PropsUtils {
             properties = new Properties();
             properties.load(is);
         } catch (FileNotFoundException e) {
-            log.error(fileName + "文件没找到");
+            logger.error(fileName + "文件没找到");
         } catch (IOException e) {
-            log.error("加载properties失败", e);
+            logger.error("加载properties失败", e);
         } finally {
             if (is != null) {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    log.error("关闭流失败", e);
+                    logger.error("关闭流失败", e);
                 }
             }
         }

@@ -16,10 +16,11 @@ import java.util.Map;
  */
 public class CustomerServiceTest {
 
-    private final CustomerService customerService;
 
-    public CustomerServiceTest(CustomerService customerService) {
-        this.customerService = customerService;
+    private CustomerService customerService;
+
+    public CustomerServiceTest() {
+        customerService = new CustomerService();
     }
 
     @Before
@@ -67,4 +68,6 @@ public class CustomerServiceTest {
 
         Assert.assertTrue(result);
     }
+
+
 }

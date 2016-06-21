@@ -73,6 +73,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Apache Commons Dbutils -->
+        <dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <version>1.6</version>
+        </dependency>
+
     </dependencies>
 
     <!-- 统一源代码的编码方式 -->
