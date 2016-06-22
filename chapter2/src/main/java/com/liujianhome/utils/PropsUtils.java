@@ -44,7 +44,7 @@ public class PropsUtils {
                 }
             }
         }
-        return null;
+        return properties;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.liujianhome;
 
+import com.liujianhome.helper.DatabaseHelper;
 import com.liujianhome.model.Customer;
 import com.liujianhome.service.CustomerService;
 import org.junit.Assert;
@@ -25,7 +26,7 @@ public class CustomerServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        // TODO 初始化数据库
+        DatabaseHelper.executeSqlFile("sql/customer_init.sql");
     }
 
     @Test
