@@ -54,7 +54,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- JSP -->
@@ -62,7 +61,6 @@
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.2</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- JSTL -->
@@ -70,7 +68,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>1.2</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- Apache Commons Dbutils -->
