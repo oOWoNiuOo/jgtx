@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class CustomerService {
 
-    Logger logger = LoggerFactory.getLogger(CustomerService.class);
+    Logger LOGGER = LoggerFactory.getLogger(CustomerService.class);
 
 
     /**

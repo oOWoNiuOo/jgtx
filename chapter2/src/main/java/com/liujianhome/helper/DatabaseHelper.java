@@ -32,7 +32,7 @@ public class DatabaseHelper {
 
     private static final BasicDataSource DATA_SOURCE;
 
-    private static final Logger logger = LoggerFactory.getLogger(DatabaseHelper.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseHelper.class);
 
 
     static {
@@ -60,7 +60,7 @@ public class DatabaseHelper {
             try {
                 conn = DATA_SOURCE.getConnection();
             } catch (SQLException e) {
-                logger.error("创建连接失败!", e);
+                LOGGER.error("创建连接失败!", e);
             } finally {
                 CONNECTION_HOLDER.set(conn);
             }
@@ -77,7 +77,7 @@ public class DatabaseHelper {
                 DatabaseHelper.executeUpdate(sql);
             }
         } catch (IOException e) {
-            logger.error("执行文件sql失败!", e);
+            LOGGER.error("执行文件sql失败!", e);
             throw new RuntimeException(e);
         }
     }
@@ -96,7 +96,7 @@ public class DatabaseHelper {
             Connection conn = getConnection();
             entityList = QUERY_RUNNER.query(conn, sql, new BeanListHandler<T>(entityClass), params);
         } catch (SQLException e) {
-            logger.error("查询List失败!", e);
+            LOGGER.error("查询List失败!", e);
             throw new RuntimeException(e);
         }
         return entityList;
@@ -119,7 +119,7 @@ public class DatabaseHelper {
             sql.append(" WHERE id = ?");
             entity = QUERY_RUNNER.query(conn, sql.toString(), new BeanHandler<T>(entityClass), params);
         } catch (SQLException e) {
-            logger.error("查询单个实体失败!", e);
+            LOGGER.error("查询单个实体失败!", e);
             throw new RuntimeException(e);
         }
         return entity;
@@ -138,7 +138,7 @@ public class DatabaseHelper {
         try {
             list = QUERY_RUNNER.query(conn, sql, new MapListHandler(), params);
         } catch (SQLException e) {
-            logger.error("执行executeQuery方法失败!", e);
+            LOGGER.error("执行executeQuery方法失败!", e);
             throw new RuntimeException(e);
         }
         return list;
@@ -157,7 +157,7 @@ public class DatabaseHelper {
         try {
             rows = QUERY_RUNNER.update(conn, sql, params);
         } catch (SQLException e) {
-            logger.error("执行executeUpdate方法异常!", e);
+            LOGGER.error("执行executeUpdate方法异常!", e);
             throw new RuntimeException(e);
         }
         return rows;
@@ -173,7 +173,7 @@ public class DatabaseHelper {
      */
     public static <T> boolean insertEntity(Class<T> entityClass, Map<String, Object> fieldMap) {
         if (CollectionUtil.isEmpty(fieldMap)) {
-            logger.error("不能插入，字段为空");
+            LOGGER.error("不能插入，字段为空");
             return false;
         }
 
@@ -207,7 +207,7 @@ public class DatabaseHelper {
     public static <T> boolean updateEntity(Class<T> entityClass, long id,
                                            Map<String, Object> fieldMap) {
         if (CollectionUtil.isEmpty(fieldMap)) {
-            logger.error("不能更新，字段为空");
+            LOGGER.error("不能更新，字段为空");
             return false;
         }
 
