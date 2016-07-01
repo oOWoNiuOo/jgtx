@@ -68,11 +68,14 @@ public final class ClassUtil {
         Set<Class<?>> classSet = new HashSet<Class<?>>();
 
         try {
-            Enumeration<URL> urls = getClassLoader().getResources(packageName.replaceAll(".", "/"));
+            Enumeration<URL> urls = getClassLoader().getResources(packageName.replace(".", "/"));
 
             while (urls.hasMoreElements()) {
                 URL url = urls.nextElement();
                 if (url != null) {
+                    if (!url.getPath().contains("/classes/")) {
+                        continue;
+                    }
                     String protocol = url.getProtocol();
                     if (protocol.equals("file")) {
                         String packagePath = url.getPath().replaceAll("%20", "");
@@ -111,26 +114,28 @@ public final class ClassUtil {
             }
         });
 
-        for (File file : files) {
-            String fileName = file.getName();
-            if (file.isFile()) {
-                String className = fileName.substring(0, fileName.lastIndexOf("."));
-                if (StringUtil.isNotEmpty(packageName)) {
-                    className = packageName + "." + className;
+        if (files != null) {
+            for (File file : files) {
+                String fileName = file.getName();
+                if (file.isFile()) {
+                    String className = fileName.substring(0, fileName.lastIndexOf("."));
+                    if (StringUtil.isNotEmpty(packageName)) {
+                        className = packageName + "." + className;
+                    }
+                    doAddClass(classSet, className);
+                } else {
+                    String subPackagePath = fileName;
+                    if (StringUtil.isNotEmpty(packagePath)) {
+                        subPackagePath = packagePath + "/" + subPackagePath;
+                    }
+                    String subPackageName = fileName;
+                    if (StringUtil.isNotEmpty(packageName)) {
+                        subPackageName = packageName + "." + subPackageName;
+                    }
+                    addClass(classSet, subPackagePath, subPackageName);
                 }
-                doAddClass(classSet, className);
-            } else {
-                String subPackagePath = fileName;
-                if (StringUtil.isNotEmpty(packagePath)) {
-                    subPackagePath = packagePath + "/" + subPackagePath;
-                }
-                String subPackageName = fileName;
-                if (StringUtil.isNotEmpty(packageName)) {
-                    subPackageName = packageName + "." + subPackageName;
-                }
-                addClass(classSet, subPackagePath, subPackageName);
-            }
 
+            }
         }
     }
 
