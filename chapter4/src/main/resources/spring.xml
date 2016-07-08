@@ -63,4 +63,14 @@
         <property name="proxyTargetClass" value="true"/>
     </bean>
 
+    <bean id="autoProxyClass" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+        <!-- 只为后缀是Impl的Bean生成代理 -->
+        <property name="beanNames" value="*Impl"/>
+        <!-- 增强 -->
+        <property name="interceptorNames" value="dogAdvisor"/>
+        <!-- 是否对对象代理生成策略进行优化 -->
+        <property name="optimize" value="true"/>
+    </bean>
+
+
 </beans>
